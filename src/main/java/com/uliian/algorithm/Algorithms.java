@@ -13,8 +13,13 @@ public class Algorithms {
     public static <T> T Roulette(List<T> source, Function<T,Integer> weightSelector){
         List<AbstractMap.SimpleEntry> routerTable = new ArrayList<>();
         int begin = 0;
+
         for (T item : source) {
-            int end = begin+weightSelector.apply(item);
+            int weight = weightSelector.apply(item);
+            if(weight<1){
+                throw new IllegalArgumentException();
+            }
+            int end = begin+weight;
             Range<Integer> range = Range.between(begin, end);
             begin = end+1;
             AbstractMap.SimpleEntry<Range<Integer>, T> kvItem = new AbstractMap.SimpleEntry<>(range, item);
