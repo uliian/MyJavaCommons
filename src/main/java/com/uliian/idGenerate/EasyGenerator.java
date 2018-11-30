@@ -1,6 +1,7 @@
 package com.uliian.idGenerate;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class EasyGenerator {
     private final CircleArray circleArray;
@@ -10,9 +11,8 @@ public class EasyGenerator {
     public EasyGenerator(int nodeId,int timeWait) {
         this.nodeId = nodeId;
         this.circleArray = new CircleArray(timeWait);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2000,1,1,0,0,0);
-        beginTime = calendar.getTime().getTime();
+        LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;
     }
 
     public IdResult generateIdResult()  {
