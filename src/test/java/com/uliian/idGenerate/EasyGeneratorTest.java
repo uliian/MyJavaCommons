@@ -57,4 +57,19 @@ public class EasyGeneratorTest {
             Assert.assertEquals(ids.size(), queue.size());
         }
     }
+
+    @Test
+    public void IdResolve_success(){
+        EasyGenerator easyGenerator = new EasyGenerator(10, 60);
+        IdResult idResult = easyGenerator.generateIdResult();
+        long id = idResult.generateId();
+        IdResult idResult1 = new IdResult(id);
+        Assert.assertTrue(idResult.equals(idResult1));
+    }
+
+    @Test
+    public void IdResolve_id_success(){
+        IdResult idResult = new IdResult(1293123601666410497L);
+        Assert.assertTrue(idResult.getSequence() == 0);
+    }
 }

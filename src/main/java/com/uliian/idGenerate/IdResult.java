@@ -1,5 +1,7 @@
 package com.uliian.idGenerate;
 
+import java.util.Objects;
+
 public class IdResult {
     private long timeStamp;
 
@@ -20,6 +22,27 @@ public class IdResult {
         this.timeStamp = timeStamp;
         this.sequence = sequence;
         this.nodeId = nodeId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IdResult)) return false;
+        IdResult idResult = (IdResult) o;
+        return getTimeStamp() == idResult.getTimeStamp() &&
+                getSequence() == idResult.getSequence() &&
+                getNodeId() == idResult.getNodeId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTimeStamp(), getSequence(), getNodeId());
+    }
+
+    public IdResult(long id){
+        this.timeStamp = id >> 31;
+        this.sequence = id << 33 >> 42;
+        this.nodeId = id << 42 >> 42;
     }
 
     private long sequence;
