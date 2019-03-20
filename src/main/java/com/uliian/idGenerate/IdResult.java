@@ -1,5 +1,8 @@
 package com.uliian.idGenerate;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.Objects;
 
 public class IdResult {
@@ -18,7 +21,6 @@ public class IdResult {
     }
 
     public IdResult(long timeStamp, long sequence, long nodeId) {
-
         this.timeStamp = timeStamp;
         this.sequence = sequence;
         this.nodeId = nodeId;
@@ -43,6 +45,12 @@ public class IdResult {
         this.timeStamp = id >> 31;
         this.sequence = id << 33 >> 42;
         this.nodeId = id << 42 >> 42;
+    }
+
+    public Date getIdDate(){
+        LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        long beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;
+        return new Date(this.timeStamp * 1000 + beginTime);
     }
 
     private long sequence;

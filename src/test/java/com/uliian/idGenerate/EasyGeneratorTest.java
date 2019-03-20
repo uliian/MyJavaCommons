@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.Stopwatch;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.*;
@@ -69,7 +72,22 @@ public class EasyGeneratorTest {
 
     @Test
     public void IdResolve_id_success(){
-        IdResult idResult = new IdResult(1293123601666410497L);
+        LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        long beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;
+        IdResult idResult = new IdResult(1301046890762076161L);
+        System.out.println(new Date(idResult.getTimeStamp() * 1000 + beginTime));
+        idResult = new IdResult(1301232433349263361L);
+        System.out.println(new Date(idResult.getTimeStamp() * 1000 + beginTime));
         Assert.assertTrue(idResult.getSequence() == 0);
+    }
+
+    @Test
+    public void generate_timestamp_id_success(){
+        EasyGenerator easyGenerator = new EasyGenerator(1, 1000);
+        System.out.println(easyGenerator.generateIdResult().getIdDate());
+        System.out.println(LocalDateTime.now());
+        long id = Helper.generateTimeId(LocalDateTime.now());
+        IdResult idResult = new IdResult(id);
+        System.out.println(idResult.getIdDate());
     }
 }
