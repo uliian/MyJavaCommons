@@ -1,5 +1,7 @@
 package com.uliian.algorithm;
 
+import org.apache.commons.lang3.Range;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -23,6 +25,47 @@ public class AlgorithmsTest {
         }
         System.out.println(test1Count);
         System.out.println(test2Count);
+    }
+
+    @Test
+    public void rangeTest() {
+        Range<Integer> between = Range.between(1, 5);
+        Assert.assertTrue(between.contains(1));
+        Assert.assertTrue(between.contains(2));
+        Assert.assertTrue(between.contains(5));
+        between = Range.between(0, 0);
+        Assert.assertTrue(between.contains(0));
+        Assert.assertFalse(between.contains(3));
+    }
+
+    @Test
+    public void shuffleListByWeightTest() {
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        for (int i = 0; i < 1000; i++) {
+            List<Integer> result = Algorithms.shuffleListByWeight(integers, x -> x);
+            System.out.println(result);
+        }
+    }
+
+    @Test
+    public void randomNumTest() {
+        int maxNum = 0;
+        int minNum = -999;
+        for (int i = 0; i < 100000; i++) {
+
+            int rm = (int) (Math.random() * (21));
+            if(i == 0){
+                minNum = rm;
+            }
+            if(rm>maxNum){
+                maxNum = rm;
+            }
+            if(rm < minNum){
+                minNum = rm;
+            }
+        }
+        System.out.println(maxNum);
+        System.out.println(minNum);
     }
 
     public static class Item {
