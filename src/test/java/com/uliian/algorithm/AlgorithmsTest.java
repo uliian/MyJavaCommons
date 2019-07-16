@@ -40,7 +40,7 @@ public class AlgorithmsTest {
 
     @Test
     public void shuffleListByWeightTest() {
-        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6,10);
         for (int i = 0; i < 1000; i++) {
             List<Integer> result = Algorithms.shuffleListByWeight(integers, x -> x);
             System.out.println(result);

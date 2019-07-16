@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="uliian-commons" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="com.uliian" external.system.module.version="1.2" type="JAVA_MODULE" version="4">
-  <component name="ExternalSystem" linkedProjectPath="$MODULE_DIR$/../../../wx-open" rootProjectPath="$MODULE_DIR$/../../../wx-open" />
+  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="com.uliian" externalSystemModuleVersion="1.4.1" linkedProjectId="uliian-commons" linkedProjectPath="$MODULE_DIR$/../.." rootProjectPath="$MODULE_DIR$/../.." />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../..">

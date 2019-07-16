@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.uliian-uliian-commons_main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.uliian-uliian-commons_main.iml" group="uliian-commons" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.uliian-uliian-commons_test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.uliian-uliian-commons_test.iml" group="uliian-commons" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/uliian-commons.iml" filepath="$PROJECT_DIR$/.idea/modules/uliian-commons.iml" group="uliian-commons" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/uliian-commons_main.iml" filepath="$PROJECT_DIR$/.idea/modules/uliian-commons_main.iml" group="uliian-commons" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/uliian-commons_test.iml" filepath="$PROJECT_DIR$/.idea/modules/uliian-commons_test.iml" group="uliian-commons" />
