@@ -10,41 +10,40 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-fun LocalDateTime.toDate():Date{
+fun LocalDateTime.toDate(): Date {
     return Date.from(this.atZone(ZoneId.systemDefault()).toInstant())
 }
 
 
-
-fun LocalTime.toDate():Date{
+fun LocalTime.toDate(): Date {
     return Date(this.toSecondOfDay().toLong())
 }
 
-fun Date.toLocalTime():LocalTime {
+fun Date.toLocalTime(): LocalTime {
     val calendar = GregorianCalendar.getInstance()
     calendar.time = this
-    return LocalTime.of(calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),calendar.get(Calendar.SECOND))
+    return LocalTime.of(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND))
 }
 
-fun Date.toSimpleString():String{
+fun Date.toSimpleString(): String {
     val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     return formatter.format(this)
 }
 
-fun LocalDate.toDate():Date{
+fun LocalDate.toDate(): Date {
     return Date.from(this.atStartOfDay(ZoneId.systemDefault()).toInstant())
 }
 
-fun LocalDateTime.toSimpleString():String{
+fun LocalDateTime.toSimpleString(): String {
     val df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     return df.format(this)
 }
 
 
-fun  EasyGenerator.generateAdviserOrderId():String{
+fun EasyGenerator.generateAdviserOrderId(): String {
     return "Adviser${this.newId()}"
 }
 
-fun Date.toLocalDate():LocalDate{
+fun Date.toLocalDate(): LocalDate {
     return this.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
 }

@@ -68,13 +68,17 @@ public class EasyGeneratorTest {
         long id = idResult.generateId();
         IdResult idResult1 = new IdResult(id);
         Assert.assertTrue(idResult.equals(idResult1));
+
+        LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        long beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;
+        System.out.println(new Date(idResult.getTimeStamp() * 1000 + beginTime));
     }
 
     @Test
     public void IdResolve_id_success(){
         LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         long beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;
-        IdResult idResult = new IdResult(1322037321503080449L);
+        IdResult idResult = new IdResult(1326637231477099521L);
         System.out.println(new Date(idResult.getTimeStamp() * 1000 + beginTime));
 //        idResult = new IdResult(1308840604989398017L);
 //        System.out.println(new Date(idResult.getTimeStamp() * 1000 + beginTime));

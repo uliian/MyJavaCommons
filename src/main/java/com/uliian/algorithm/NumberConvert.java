@@ -7,6 +7,7 @@ import java.util.List;
  * 自定义进制转换
  */
 public class NumberConvert {
+
     private String charsets = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     final private int length;
 
