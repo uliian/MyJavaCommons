@@ -39,11 +39,6 @@ fun LocalDateTime.toSimpleString(): String {
     return df.format(this)
 }
 
-
-fun EasyGenerator.generateAdviserOrderId(): String {
-    return "Adviser${this.newId()}"
-}
-
 fun Date.toLocalDate(): LocalDate {
     return this.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
 }

@@ -2,9 +2,14 @@
 buildscript {
     ext {
         springBootVersion = '2.1.1.RELEASE'
-        kotlin_version = '1.3.41'
+        kotlin_version = '1.3.70'
     }
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+
+        maven {
+            url 'https://www.myget.org/F/uliian_maven/maven/'
+        }
         mavenCentral()
     }
     dependencies {
@@ -19,7 +24,7 @@ plugins {
 
 
 group 'com.uliian'
-version '1.4.1'
+version '1.5.0'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -34,6 +39,8 @@ tasks.withType(JavaCompile) {
 
 
 repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+
     maven {
         url 'https://www.myget.org/F/uliian_maven/maven/'
     }
