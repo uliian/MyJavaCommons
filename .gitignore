@@ -24,3 +24,4 @@ hs_err_pid*
 upload.gradle
 /.idea/
 .idea/**
+/gradle.properties
