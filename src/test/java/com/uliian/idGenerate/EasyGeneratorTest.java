@@ -37,14 +37,14 @@ public class EasyGeneratorTest {
         final int TOTAL_THREADS = 16;
         ExecutorService executorService = Executors.newFixedThreadPool(TOTAL_THREADS);
 
-        for (int cc = 0; cc < 10; cc++) {
+        for (int cc = 0; cc < 1; cc++) {
             long beginTime = System.currentTimeMillis();
             ConcurrentLinkedQueue<Long> queue = new ConcurrentLinkedQueue();
 
             EasyGenerator easyGenerator = new EasyGenerator(10, 60);
 
             ArrayList<Callable<Integer>> callables = new ArrayList<>();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1; i++) {
                 Callable<Integer> c = () -> {
                     for (int j = 0; j < 50000; j++) {
                         queue.add(easyGenerator.newId());
