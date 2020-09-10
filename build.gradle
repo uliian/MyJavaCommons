@@ -31,7 +31,7 @@ tasks.withType(JavaCompile) {
 
 
 group 'com.uliian'
-version '1.5.1'
+version '1.5.2'
 
 apply plugin: 'java'
 apply plugin: 'maven'
