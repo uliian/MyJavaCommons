@@ -95,4 +95,36 @@ public class EasyGeneratorTest {
         IdResult idResult = new IdResult(id);
         System.out.println(idResult.getIdDate());
     }
+
+    @Test
+    public void idResolve(){
+        IdResult idResult = new IdResult(1460512762252754945L);
+        System.out.println(idResult);
+    }
+
+    @Test
+    public void Idt(){
+        int nodeId1 = 1;
+        EasyGenerator easyGenerator = new EasyGenerator(nodeId1, 600000);
+        EasyGenerator easyGenerator2 = new EasyGenerator(2,600000);
+        HashSet<Long> sets = new HashSet<>();
+
+        for (int i = 0;i<99999999;i++){
+            IdResult idResult = easyGenerator.generateIdResult();
+            Assert.assertEquals(idResult.getNodeId(),nodeId1);
+            long newId = idResult.generateId();
+            IdResult idResult1 = new IdResult(newId);
+            sets.add(newId);
+            long newId2 = easyGenerator2.newId();
+
+            if(sets.contains(newId2)){
+                System.out.println(idResult);
+                System.out.println(idResult1);
+                System.out.println(newId2);
+                System.out.println(i);
+            }
+
+        }
+        
+    } 
 }

@@ -1,15 +1,10 @@
 
 buildscript {
     ext {
-        springBootVersion = '2.1.1.RELEASE'
         kotlin_version = '1.3.72'
     }
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-
-        maven {
-            url 'https://www.myget.org/F/uliian_maven/maven/'
-        }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         mavenCentral()
     }
     dependencies {
@@ -31,10 +26,10 @@ tasks.withType(JavaCompile) {
 
 
 group 'com.uliian'
-version '1.5.2'
+version '1.5.4'
 
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply from:"upload.gradle"
 
 sourceCompatibility = 1.8
@@ -46,17 +41,15 @@ tasks.withType(JavaCompile) {
 
 
 repositories {
-    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
 
-    maven {
-        url 'https://www.myget.org/F/uliian_maven/maven/'
-    }
     mavenCentral()
 }
 
 dependencies {
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'org.slf4j:slf4j-api:1.7.31'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
