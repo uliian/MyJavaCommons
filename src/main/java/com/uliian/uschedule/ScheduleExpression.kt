@@ -1,9 +1,9 @@
 package com.uliian.uschedule
 
 /**
- * M month of days: the days of month split by ',' example:MD 1,2,10,30
- * W week of days: the days of week split by ',' example:WD 3,5,7
- * MW week of month and days of week :the days of week and week of month split by ',' example: MWD 3 2,4
+ * M month of days: the days of month split by ',' example:M 1,2,10,30
+ * W week of days: the days of week split by ',' example:W 3,5,7
+ * MW week of month and days of week :the days of week and week of month split by ',' example: MW 3 2,4
  */
 abstract class ScheduleExpression(private val expression: String) {
     companion object {
