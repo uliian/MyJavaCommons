@@ -109,7 +109,7 @@ public class EasyGeneratorTest {
         EasyGenerator easyGenerator2 = new EasyGenerator(2,600000);
         HashSet<Long> sets = new HashSet<>();
 
-        for (int i = 0;i<99999999;i++){
+        for (int i = 0;i<999;i++){
             IdResult idResult = easyGenerator.generateIdResult();
             Assert.assertEquals(idResult.getNodeId(),nodeId1);
             long newId = idResult.generateId();
