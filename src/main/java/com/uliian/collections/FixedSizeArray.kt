@@ -1,27 +1,27 @@
 package com.uliian.collections
 
+import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
+/**
+ * 定长数组，固定数组长度，先进先出，通常用去边接字符串检测，如HTTP中的\r\n，boundary检测
+ */
 class FixedSizeArray<T>(val size: Int) {
-    private val array: ArrayList<T> = ArrayList(size)
+    private val array = arrayOfNulls<Any>(size)
 
     private val count = AtomicInteger(0)
 
     fun add(item: T) {
-        val (ix, count) = getWriteIndex()
-        if (count < size) {
-            array.add(item)
-        } else {
-            array[ix] = item
-        }
+        val ix = getWriteIndex()
+        array[ix] = item
     }
 
     private fun getReadIndex(ix: Int): Int {
-        return (this.firstIndex()+ix)%size
+        return (this.firstIndex() + ix) % size
     }
 
-    fun first(): T {
-        return array[firstIndex()]
+    fun first(): T? {
+        return array[firstIndex()] as T
     }
 
     private fun firstIndex(): Int {
@@ -32,16 +32,16 @@ class FixedSizeArray<T>(val size: Int) {
         return currentCount % size
     }
 
-    private fun getWriteIndex(): Pair<Int, Int> {
+    private fun getWriteIndex(): Int {
         val count = count.getAndIncrement()
-        return Pair(count % size, count)
+        return count % size
     }
 
-    fun get(ix: Int): T {
+    fun get(ix: Int): T? {
         if (ix >= size) {
             throw IndexOutOfBoundsException()
         }
-        return array[getReadIndex(ix)]
+        return array[getReadIndex(ix)] as T
     }
 
     fun arrayEquals(data: Array<T>): Boolean {
