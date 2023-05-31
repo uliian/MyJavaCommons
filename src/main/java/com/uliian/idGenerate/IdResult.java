@@ -9,13 +9,13 @@ import java.util.Objects;
 
 public class IdResult {
 
-    private long timeStamp;
+    private final long timeStamp;
 
     public long getTimeStamp() {
         return timeStamp;
     }
 
-    private Model model = Model.Server;
+    private final Model model;
     @Override
     public String toString() {
         LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);

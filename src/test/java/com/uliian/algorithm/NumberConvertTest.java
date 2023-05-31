@@ -3,11 +3,9 @@ package com.uliian.algorithm;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-
 public class NumberConvertTest {
 
-    private NumberConvert convert;
+    private final NumberConvert convert;
 
     public NumberConvertTest() {
         this.convert = new NumberConvert();

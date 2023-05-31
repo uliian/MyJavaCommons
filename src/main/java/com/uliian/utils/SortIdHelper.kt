@@ -30,7 +30,7 @@ class ChangeSort  {
  * @return
  */
 fun <T> List<T>.generateNewSortId(
-        sortIdSelector: (T) -> kotlin.Long,
+        sortIdSelector: (T) -> Long,
         changeSort: ChangeSort,
         sortType: SortType,
         newId: Long,

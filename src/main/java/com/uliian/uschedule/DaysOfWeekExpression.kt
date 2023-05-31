@@ -1,7 +1,6 @@
 package com.uliian.uschedule
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 open class DaysOfWeekExpression(expression: String) : ScheduleExpression(expression), IUSchedule {

@@ -1,6 +1,5 @@
 package com.uliian.utils
 
-import com.uliian.idGenerate.EasyGenerator
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime

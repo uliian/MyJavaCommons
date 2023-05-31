@@ -4,9 +4,7 @@ import org.junit.Assert
 import org.junit.Test
 
 data class Data(val id: Long, val name: String)
-data class TreeData(val id: String, val name: String,override val children: ArrayList<TreeData> = arrayListOf()) : IMultiTreeItem<TreeData> {
-
-}
+data class TreeData(val id: String, val name: String,override val children: ArrayList<TreeData> = arrayListOf()) : IMultiTreeItem<TreeData>
 
 class CollectionTests {
 

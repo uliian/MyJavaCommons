@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class CircleArray {
     private final int capacity;
-    private AtomicReferenceArray<IdSeed> idSeeds;
+    private final AtomicReferenceArray<IdSeed> idSeeds;
 
     public CircleArray(int capacity) {
         if(capacity<2){

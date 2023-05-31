@@ -12,7 +12,7 @@ public class EasyGenerator {
     private final long beginTime;
 
     private final Model model;
-    private static Logger LOG = LoggerFactory.getLogger(EasyGenerator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EasyGenerator.class);
 
     public EasyGenerator(int nodeId, int timeWait) {
         this(nodeId,timeWait,Model.Server);
@@ -57,7 +57,7 @@ public class EasyGenerator {
     }
 
     public long newId() {
-        LOG.debug("new id generate:{}",this.toString());
+        LOG.debug("new id generate:{}", this);
         return this.generateIdResult().generateId();
     }
 }

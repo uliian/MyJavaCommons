@@ -2,18 +2,19 @@ package com.uliian.idGenerate;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.Stopwatch;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class EasyGeneratorTest {
     @Test
@@ -40,7 +41,7 @@ public class EasyGeneratorTest {
 
         for (int cc = 0; cc < 1; cc++) {
             long beginTime = System.currentTimeMillis();
-            ConcurrentLinkedQueue<Long> queue = new ConcurrentLinkedQueue();
+            ConcurrentLinkedQueue<Long> queue = new ConcurrentLinkedQueue<>();
 
             EasyGenerator easyGenerator = new EasyGenerator(10, 60);
 
@@ -68,7 +69,7 @@ public class EasyGeneratorTest {
         IdResult idResult = easyGenerator.generateIdResult();
         long id = idResult.generateId();
         IdResult idResult1 = new IdResult(id);
-        Assert.assertTrue(idResult.equals(idResult1));
+        assertTrue(idResult == idResult1);
 
         LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         long beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;

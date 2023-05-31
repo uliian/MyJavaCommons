@@ -5,9 +5,7 @@ import org.apache.commons.lang3.Range;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Algorithms {
     public static <T> T Roulette(List<T> source, Function<T, Integer> weightSelector) {
@@ -48,7 +46,7 @@ public class Algorithms {
         ArrayList<T> sourceCopy = new ArrayList<>(source);
 
         ArrayList<T> result = new ArrayList<>(source.size());
-        for (; sourceCopy.size() > 0; ) {
+        while (sourceCopy.size() > 0) {
             T selectedItem = Roulette(sourceCopy, weightSelector);
             sourceCopy.remove(selectedItem);
             result.add(selectedItem);

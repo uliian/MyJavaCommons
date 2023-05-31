@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 class IdSeed {
     private final long timeStamp;
-    private AtomicLong sequence;
+    private final AtomicLong sequence;
 
     public IdSeed(long timeStamp) {
         this.timeStamp = timeStamp;
