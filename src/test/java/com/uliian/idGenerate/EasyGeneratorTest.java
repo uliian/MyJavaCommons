@@ -69,7 +69,7 @@ public class EasyGeneratorTest {
         IdResult idResult = easyGenerator.generateIdResult();
         long id = idResult.generateId();
         IdResult idResult1 = new IdResult(id);
-        assertTrue(idResult == idResult1);
+        assertEquals(idResult, idResult1);
 
         LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
         long beginTime = of.toEpochSecond(ZoneOffset.UTC)*1000;
