@@ -15,6 +15,7 @@ public class IdResult {
         return timeStamp;
     }
 
+    private Model model = Model.Server;
     @Override
     public String toString() {
         LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
@@ -37,9 +38,14 @@ public class IdResult {
     }
 
     public IdResult(long timeStamp, long sequence, long nodeId) {
+        this(timeStamp,sequence,nodeId,Model.Server);
+    }
+
+    public IdResult(long timeStamp, long sequence, long nodeId,Model model){
         this.timeStamp = timeStamp;
         this.sequence = sequence;
         this.nodeId = nodeId;
+        this.model = model;
     }
 
     @Override
@@ -58,9 +64,24 @@ public class IdResult {
     }
 
     public IdResult(long id){
+        this(id,Model.Server);
+    }
+
+    public IdResult(long id,Model model){
+        this.model = model;
         this.timeStamp = id >> 31;
-        this.sequence = (id & 2147482624)>>10;
-        this.nodeId = id & 1023;
+        switch (this.model){
+            case Server:
+                this.sequence = (id & 2147482624)>>10;
+                this.nodeId = id & 1023;
+                break;
+            case Client:
+                this.sequence = (id & 2145386496)>>22;
+                this.nodeId = id & 2097151;
+                break;
+            default:
+                throw new IllegalArgumentException("错误的ID模式");
+        }
     }
 
     public Date getIdDate(){
@@ -73,9 +94,16 @@ public class IdResult {
     private final long nodeId;
 
     public long generateId(){
-        //|--1位符号--|--32位时间戳--|--21位序列--|--10位机器码--|
-        return this.timeStamp << 31 | this.sequence << 10 | this.nodeId;
-//        //|--1位符号--|--32位时间戳--|--24位序列--|--7位机器码--|
-//        return 0 | this.timeStamp << 31 | this.sequence << 7 | this.nodeId;
+        //server: |--1位符号--|--32位时间戳--|--21位序列--|--10位机器码--|
+        //client: |--1位符号--|--32位时间戳--|--10位序列--|--21位机器码--|
+        switch (this.model){
+            case Server:
+                return this.timeStamp << 31 | this.sequence << 10 | this.nodeId;
+            case Client:
+                return this.timeStamp << 31 | this.sequence << 22 | this.nodeId;
+            default:
+                throw new IllegalArgumentException("错误的ID模式");
+
+        }
     }
 }

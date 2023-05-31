@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.Stopwatch;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -91,7 +92,8 @@ public class EasyGeneratorTest {
         System.out.println(easyGenerator.generateIdResult().getIdDate());
         System.out.println(LocalDateTime.now());
         System.out.println(easyGenerator.newId());
-        long id = Helper.generateTimeId(LocalDateTime.now());
+        long id = Helper.generateTimeId(LocalDateTime.of(2023,2,3,0,0,0));
+        System.out.println(id);
         IdResult idResult = new IdResult(id);
         System.out.println(idResult.getIdDate());
     }
@@ -126,5 +128,32 @@ public class EasyGeneratorTest {
 
         }
         
-    } 
+    }
+
+    @Test
+    public void IdResultTest(){
+        LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        long beginTime = of.toEpochSecond(ZoneOffset.UTC) * 1000;
+
+        IdResult idResultServer = new IdResult((System.currentTimeMillis()- beginTime)/1000, 1, 1);
+
+        System.out.println(idResultServer);
+        System.out.println(idResultServer.generateId());
+
+//        IdResult id = new IdResult(easyGenerator.generateIdResult().getTimeStamp(), 1, 1048576);
+//        System.out.println(id.generateId());
+
+    }
+
+    @Test
+    public void IdResultClientTest(){
+        LocalDateTime of = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
+        long beginTime = of.toEpochSecond(ZoneOffset.UTC) * 1000;
+
+        IdResult idResultClient = new IdResult((System.currentTimeMillis()- beginTime)/1000, 1, 1048576,Model.Client);
+        System.out.println(idResultClient);
+        System.out.println(idResultClient.generateId());
+
+        System.out.println(new IdResult(idResultClient.generateId(),Model.Client));
+    }
 }
