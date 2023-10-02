@@ -7,10 +7,10 @@ package com.uliian.collections
  * @param TKey
  * @param keySelector key选择器
  * @param parentKeySelector 父key选择器
- * @return
+ * @return 多叉树，按KEY排序，如果存在多个根，则第一个根即是关键根，如果要去掉那些中间节点断掉的根，则取结果的第一个元素即可。
  */
-fun <T : IMultiTreeItem<T>, TKey> Iterable<T>.toMultiTree(keySelector: (T) -> TKey, parentKeySelector: (T) -> TKey): ArrayList<T> {
-    val map = this.map { keySelector(it) to it }.toMap()
+fun <T : IMultiTreeItem<T>, TKey : Comparable<TKey>> Iterable<T>.toMultiTree(keySelector: (T) -> TKey, parentKeySelector: (T) -> TKey): ArrayList<T> {
+    val map = this.associateBy { keySelector(it) }.toSortedMap()
     val rootList = arrayListOf<T>()
     map.forEach {
         val parentKey = parentKeySelector(it.value)
@@ -21,6 +21,7 @@ fun <T : IMultiTreeItem<T>, TKey> Iterable<T>.toMultiTree(keySelector: (T) -> TK
             rootList.add(it.value)
         }
     }
+
     return rootList
 }
 

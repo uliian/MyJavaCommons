@@ -73,4 +73,19 @@ class CollectionTests {
         Assert.assertTrue(result.size == 1)
         Assert.assertTrue(result[0].id == "000101")
     }
+
+    @Test
+    fun multiTree_oneRoot_generate_test(){
+        val listData = listOf(
+            TreeData("00",name = "00"),
+            TreeData("0001",name = "0001"),
+            TreeData("0002","0002"),
+            TreeData("000101","000101"),
+            TreeData("000301","000301"),
+            TreeData("01","01")
+        )
+        val tree = listData.toMultiTree({it.id},{it.id.substring(0,it.id.length-2)})
+
+        Assert.assertTrue(tree.first().id == "00")
+    }
 }
