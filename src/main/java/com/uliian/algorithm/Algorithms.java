@@ -37,16 +37,16 @@ public class Algorithms {
     /**
      * 随机按权重洗牌
      *
-     * @param source
-     * @param weightSelector
-     * @param <T>
-     * @return
+     * @param source 源序列
+     * @param weightSelector 权重属性选择
+     * @param <T> item类型
+     * @return 随机按权重洗牌结果
      */
     public static <T> List<T> shuffleListByWeight(List<T> source, Function<T, Integer> weightSelector) {
         ArrayList<T> sourceCopy = new ArrayList<>(source);
 
         ArrayList<T> result = new ArrayList<>(source.size());
-        while (sourceCopy.size() > 0) {
+        while (!sourceCopy.isEmpty()) {
             T selectedItem = Roulette(sourceCopy, weightSelector);
             sourceCopy.remove(selectedItem);
             result.add(selectedItem);

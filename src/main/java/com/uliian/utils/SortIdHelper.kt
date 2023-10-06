@@ -9,74 +9,45 @@ private enum class SortAction {
     Down
 }
 
-class ChangeSort  {
-    var id:Long? = -1
-    var index : Int = -1
+class ChangeSort<TKey> {
+    var id: TKey? = null
+    var slotIndex: Int = -1
     override fun toString(): String {
-        return "ChangeSort(id=$id, index=$index)"
+        return "ChangeSort(id=$id, slotIndex=$slotIndex)"
     }
 }
 
-/**
- * 生成新的排序ID
- * 这个方法用于拖拽排序生成新的排序ID，基于场景使用Snowflake算法给出的旧排序ID，生成新的排序ID
- *
- * @param T
- * @param sortIdSelector 排序字段
- * @param changeSort 排序变更请求
- * @param sortType 排序类型
- * @param newId 如果是排到端上，给出的新ID（新的Snowflake ID）
- * @param idSelector 主键选择器
- * @return
- */
-fun <T> List<T>.generateNewSortId(
-        sortIdSelector: (T) -> Long,
-        changeSort: ChangeSort,
-        sortType: SortType,
-        newId: Long,
-        idSelector: (T) -> Any
+class ChangeSortByIndex<TKey> {
+    var id: TKey? = null
+    var newIndex: Int = -1
+    var oldIndex: Int = -1
+    override fun toString(): String {
+        return "ChangeSortByIndex(id=$id, newIndex=$newIndex, oldIndex=$oldIndex)"
+    }
+
+}
+
+fun <T, TKey> List<T>.generateNewSortId(
+    changeSort: ChangeSort<TKey>,
+    sortType: SortType,
+    sortIdSelector: (T) -> Long,
+    newId: Long
 ): Long {
-    if (changeSort.index == 0 && sortType == SortType.DESC) {
-        return newId
-    }
-
-    if(changeSort.index == this.size-1 && sortType == SortType.ASC){
-        return newId
-    }
-
-    val changeItemIx = this.indexOfFirst { idSelector(it) == changeSort.id }
-    val action = if (changeSort.index > changeItemIx) SortAction.Down else SortAction.Up
-
-    val beforeId = if (sortType == SortType.DESC) {
-        when {
-            changeSort.index == 0 -> newId
-            action == SortAction.Down -> sortIdSelector(this[changeSort.index])
-            else -> sortIdSelector(
-                    this[changeSort.index - 1]
-            )
+    val newSortIdPair:Pair<Long,Long> = when (sortType) {
+        SortType.ASC -> {
+            when (changeSort.slotIndex) {
+                0 -> Pair(0L, sortIdSelector(this[0]))
+                this.size -> Pair(sortIdSelector(this[this.size-1]),newId)
+                else -> Pair(sortIdSelector(this[changeSort.slotIndex-1]),sortIdSelector(this[changeSort.slotIndex]))
+            }
         }
-    } else {
-        when {
-            changeSort.index == 0 -> 0
-            action == SortAction.Down -> sortIdSelector(this[changeSort.index])
-            else -> sortIdSelector(this[changeSort.index - 1])
+        SortType.DESC -> {
+            when (changeSort.slotIndex) {
+                0 -> Pair(newId,sortIdSelector(this[0]))
+                this.size -> Pair(sortIdSelector(this[this.size-1]),0L)
+                else -> Pair(sortIdSelector(this[changeSort.slotIndex-1]),sortIdSelector(this[changeSort.slotIndex]))
+            }
         }
     }
-    val lastId = if (sortType == SortType.DESC) {
-        when {
-            changeSort.index == this.size - 1 -> 0
-            action == SortAction.Down -> sortIdSelector(this[changeSort.index + 1])
-            else -> sortIdSelector(
-                    this[changeSort.index]
-            )
-        }
-    } else {
-        when {
-            changeSort.index == this.size - 1 -> newId
-            action == SortAction.Down -> sortIdSelector(this[changeSort.index+1])
-            else -> sortIdSelector(this[changeSort.index])
-        }
-    }
-
-    return (beforeId + lastId) / 2
+    return (newSortIdPair.first + newSortIdPair.second)/2
 }

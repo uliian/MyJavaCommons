@@ -26,7 +26,7 @@ tasks.withType(JavaCompile).configureEach {
 
 
 group 'com.uliian'
-version '1.5.8'
+version '1.5.9'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'
