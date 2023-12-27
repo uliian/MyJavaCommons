@@ -6,6 +6,8 @@ import org.junit.Test
 data class Data(val id: Long, val name: String)
 data class TreeData(val id: String, val name: String,override val children: ArrayList<TreeData> = arrayListOf()) : IMultiTreeItem<TreeData>
 
+data class GenericData(val id: String, val name: String)
+
 class CollectionTests {
 
     @Test
@@ -87,5 +89,24 @@ class CollectionTests {
         val tree = listData.toMultiTree({it.id},{it.id.substring(0,it.id.length-2)})
 
         Assert.assertTrue(tree.first().id == "00")
+    }
+
+    @Test
+    fun multiTree_generate_v2_Test() {
+        val listData = listOf(
+            GenericData("00",name = "00"),
+            GenericData("0001",name = "0001"),
+            GenericData("0002","0002"),
+            GenericData("000101","000101"),
+            GenericData("01","01")
+        )
+        val tree = listData.toMultiTree({
+            TreeData(it.id,it.name, children = arrayListOf())
+        },{it.id},{it.id.substring(0,it.id.length-2)})
+        Assert.assertEquals((tree[0].children[0].children[0]).id,"000101")
+        println(tree)
+        val list = tree.multiTreeToList()
+        Assert.assertTrue(list.size == 5)
+        Assert.assertTrue(list.none { it.children.isNotEmpty() })
     }
 }

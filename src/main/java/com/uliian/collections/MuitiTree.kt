@@ -45,6 +45,21 @@ fun <T : IMultiTreeItem<T>> Iterable<T>.multiTreeToList(outList:ArrayList<T> = a
     return outList
 }
 
+fun <T,TKey,TOut:IMultiTreeItem<TOut>>Iterable<T>.toMultiTree(transform:(T)->TOut, keySelector: (TOut) -> TKey, parentKeySelector: (TOut) -> TKey):List<TOut> {
+    val map = this.map(transform).associateBy { keySelector(it) }.toMap()
+    val rootList = arrayListOf<TOut>()
+    map.forEach {
+        val parentKey = parentKeySelector(it.value)
+        val parent = map[parentKey]
+        if (parent != null) {
+            parent.children.add(it.value)
+        } else {
+            rootList.add(it.value)
+        }
+    }
+    return rootList
+}
+
 /**
  * 在多叉树中查找符合条件的数据
  *
