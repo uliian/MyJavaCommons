@@ -1,5 +1,7 @@
 package com.uliian.uschedule
 
+import java.util.*
+
 /**
  * M month of days: the days of month split by ',' example:M 1,2,10,30
  * W week of days: the days of week split by ',' example:W 3,5,7
@@ -8,7 +10,7 @@ package com.uliian.uschedule
 abstract class ScheduleExpression(private val expression: String) {
     companion object {
         fun createExpression(expression: String): IUSchedule {
-            val prefix = expression.split(" ").first().toUpperCase()
+            val prefix = expression.split(" ").first().uppercase(Locale.getDefault())
             return when (prefix) {
                 ExpressionType.DaysOfMonth.ix -> DaysOfMonthExpression(expression)
                 ExpressionType.DaysOfWeek.ix -> DaysOfWeekExpression(expression)

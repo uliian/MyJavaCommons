@@ -1,21 +1,19 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.9.22'
+        kotlin_version = '1.9.24'
     }
     repositories {
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin"}
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         mavenCentral()
     }
     dependencies {
-//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
     }
 }
 
 plugins {
     id 'org.jetbrains.kotlin.jvm' version "$kotlin_version"
-//    id 'net.ltgt.apt' version '0.8'
     id 'signing'
 }
 
@@ -26,7 +24,7 @@ tasks.withType(JavaCompile).configureEach {
 
 
 group 'com.uliian'
-version '1.5.10'
+version '1.5.11'
 
 apply plugin: 'java'
 apply plugin: 'maven-publish'

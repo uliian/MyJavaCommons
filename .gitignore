@@ -25,3 +25,5 @@ upload.gradle
 /.idea/
 .idea/**
 /gradle.properties
+/build/
+/.gradle
