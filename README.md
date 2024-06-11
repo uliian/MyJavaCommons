@@ -17,6 +17,26 @@ SnowFlake变形算法：`com.uliian.idGenerate.EasyGenerator.EasyGenerator`
 
 帮助方法：`com.uliian.idGenerate.Helper.generateTimeId`这个方法用来生成在某个时间点生成的第0个ID，可用于某些和createTime相关的查询上
 
+### ID反解
+
+```mysql
+select (id >> 31)                                                                         AS timestamp,
+       FROM_UNIXTIME((((id >> 31) & 0xFFFFFFFF) + UNIX_TIMESTAMP('2000-01-01 00:00:00'))) AS create_time,
+       (id & 2147482624) >> 10                                                            AS sequence,
+       id & 1023                                                                          AS node_id
+from `table_name`
+```
+
+```javascript
+function parseId(id){ 
+    const timestamp = id>>31n;
+    const sequence = (id & 2147482624n)>>10n;
+    const nodeId = id & 1023n; 
+    const timeStamp = (946684800 + Number(timestamp))*1000;
+    
+    return{timestamp,sequence,nodeId,createTime:new Date(timeStamp)} 
+}
+```
 
 ## 集合帮助类
 `com.uliian.collections.CollectionExteionsKt.diff(java.lang.Iterable<? extends T>, java.lang.Iterable<? extends T>)`
