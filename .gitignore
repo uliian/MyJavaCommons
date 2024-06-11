@@ -27,3 +27,4 @@ upload.gradle
 /gradle.properties
 /build/
 /.gradle
+/out/**
